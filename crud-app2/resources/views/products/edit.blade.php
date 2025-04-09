@@ -3,43 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Edit a Product</h1>
-    <div>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+        <h1 class="text-2xl font-semibold text-center text-gray-800 mb-6">Edit a Product</h1>
+
         @if($errors->any())
-        <ul>
+        <ul class="mb-4 text-red-600 text-sm list-disc list-inside">
             @foreach($errors->all() as $error)
                 <li>{{$error}}</li>
             @endforeach
         </ul>
-
         @endif
+
+        <form action="{{ route('product.update', ['product' => $product]) }}" method="POST" class="space-y-4">
+            @csrf
+            @method("PUT")
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700" for="name">Name</label>
+                <input type="text" name="name" placeholder="Name" value="{{ $product->name }}" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700" for="qty">Qty</label>
+                <input type="text" name="qty" placeholder="Qty" value="{{ $product->qty }}" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700" for="price">Price</label>
+                <input type="text" name="price" placeholder="Price" value="{{ $product->price }}" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700" for="description">Description</label>
+                <input type="text" name="description" placeholder="Description" value="{{ $product->description }}" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition">Update Product</button>
+            </div>
+        </form>
     </div>
-    <form action="{{route('product.update', ['product'=>$product])}}" method="POST">
-        @csrf
-        @method("PUT")
-        <div>
-            <label for="">Name</label>
-            <input type="name" name="name" placeholder="Name" value="{{$product->name}}">
-        </div>
-        <div>
-            <label for="">Qty</label>
-            <input type="text" name="qty" placeholder="Qty" value="{{$product->qty}}">
-        </div>
-        <div>
-            <label for="">Price</label>
-            <input type="text" name="price" placeholder="Price" value="{{$product->price}}">
-        </div>
-        <div>
-            <label for="">Description</label>
-            <input type="text" name="description" placeholder="Description" value="{{$product->description}}">
-        </div>
-        <div>
-            <button type="submit">Update Product</button>
-        </div>
-    </form>
 </body>
 </html>
