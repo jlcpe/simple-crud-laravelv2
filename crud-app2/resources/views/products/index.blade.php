@@ -8,6 +8,9 @@
 </head>
 <body>
     <h1>product</h1>
+    <a href="{{route('product.create')}}">
+        <button>Create a Product</button>
+    </a>
     <div>
         @if(session()->has('success'))
             <div>
@@ -35,7 +38,7 @@
                     <td>{{$product->description}}</td>
                     <td><a href="{{route('product.edit', ['product'=>$product])}}">Edit</a></td>
                     <td>
-                        <form action="" method="POST">
+                        <form action="{{route('product.delete', ['product' => $product])}}" method="POST">
                             @csrf
                             @method('delete')
                             <input type="submit" value="Delete">
