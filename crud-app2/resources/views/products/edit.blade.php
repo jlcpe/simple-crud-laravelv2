@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create</title>
+    <title>Edit</title>
 </head>
 <body>
-    <h1>Create a Product</h1>
+    <h1>Edit a Product</h1>
     <div>
         @if($errors->any())
         <ul>
@@ -18,27 +18,27 @@
 
         @endif
     </div>
-    <form action="{{route('product.store')}}" method="POST">
+    <form action="{{route('product.update', ['product'=>$product])}}" method="POST">
         @csrf
-        @method("POST")
+        @method("PUT")
         <div>
             <label for="">Name</label>
-            <input type="name" name="name" placeholder="Name">
+            <input type="name" name="name" placeholder="Name" value="{{$product->name}}">
         </div>
         <div>
             <label for="">Qty</label>
-            <input type="text" name="qty" placeholder="Qty">
+            <input type="text" name="qty" placeholder="Qty" value="{{$product->qty}}">
         </div>
         <div>
             <label for="">Price</label>
-            <input type="text" name="price" placeholder="Price">
+            <input type="text" name="price" placeholder="Price" value="{{$product->price}}">
         </div>
         <div>
             <label for="">Description</label>
-            <input type="text" name="description" placeholder="Description">
+            <input type="text" name="description" placeholder="Description" value="{{$product->description}}">
         </div>
         <div>
-            <button type="submit">Save a New Product</button>
+            <button type="submit">Update Product</button>
         </div>
     </form>
 </body>
